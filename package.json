@@ -1,6 +1,6 @@
 {
   "name": "mv3-hot-reload",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Enable hot reloading for content script and background script in MV3.",
   "bin": "./out/bin/mv3-hot-reload.js",
   "repository": "https://github.com/pacexy/mv3-hot-reload",
