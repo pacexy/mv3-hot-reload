@@ -1,6 +1,6 @@
 {
   "name": "mv3-hot-reload",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Enable hot reloading for MV3.",
   "bin": "./out/bin/mv3-hot-reload.js",
   "repository": "https://github.com/pacexy/mv3-hot-reload",
