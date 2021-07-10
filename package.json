@@ -1,23 +1,28 @@
 {
   "name": "mv3-hot-reload",
-  "version": "0.1",
+  "version": "0.0.1",
   "description": "Enable hot reloading for MV3.",
-  "bin": "./out/bin.js",
-  "main": "./out/index.js",
+  "bin": "./out/bin/mv3-hot-reload.js",
   "repository": "https://github.com/pacexy/mv3-hot-reload",
   "author": "pacexy",
   "license": "MIT",
   "private": false,
   "scripts": {
+    "dev": "tsc -w",
+    "prepare": "npm run build",
     "build": "tsc"
   },
   "files": [
-    "/out"
+    "out",
+    "content.js",
+    "background.js"
   ],
   "devDependencies": {
+    "@types/chrome": "^0.0.146",
     "@types/jest": "^26.0.24",
     "@types/lodash": "^4.14.171",
     "@types/node": "^16.0.1",
+    "@types/ws": "^7.4.6",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/parser": "^4.28.2",
     "eslint": "^7.30.0",
@@ -33,5 +38,10 @@
     "ts-jest": "^27.0.3",
     "tsconfig-paths": "^3.10.1",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.2",
+    "lodash": "^4.17.21",
+    "ws": "^7.5.3"
   }
 }
