@@ -44,10 +44,30 @@ Example:
 module.exports = {
   // Specify the port of hot reload server, defaults to 9012
   port: 9012,
-  // Specify the directory you want to watch, defaults to 'dist
+  // Specify the directory you want to watch, defaults to 'dist'
   directory: 'dist',
   // Specifies an array of filenames that should be excluded in watched directory
   exclude: [],
+}
+```
+
+If you want to set the port, you also need to expose it with `process.env.MV3_HOT_RELOAD_PORT` to
+the client side.
+
+An example:
+
+```js
+// webpack.config.js
+
+const config = require('./mv3-hot-reload.config')
+
+module.exports = {
+  // ...
+  plugins: [
+    new webpack.EnvironmentPlugin({
+      MV3_HOT_RELOAD_PORT: config.port,
+    }),
+  ],
 }
 ```
 

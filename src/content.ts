@@ -1,6 +1,6 @@
-import { isDev, Message } from './utils'
+import { isDev, Message, PORT } from './utils'
 
-const ws = new WebSocket('ws://localhost:9012')
+const ws = new WebSocket(`ws://localhost:${PORT}`)
 
 if (isDev) {
   ws.addEventListener('message', (event) => {
