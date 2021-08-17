@@ -20,9 +20,9 @@
     "build": "tsc"
   },
   "files": [
-    "out",
-    "content.js",
-    "background.js"
+    "./out/**",
+    "./content.js",
+    "./background.js"
   ],
   "devDependencies": {
     "@types/chrome": "^0.0.146",
