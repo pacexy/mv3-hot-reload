@@ -16,6 +16,7 @@ interface Config {
 let port = 9012
 let directory = 'dist'
 let exclude: string[] = []
+const quiet = !!process.env.QUIET
 
 try {
   const CONFIG_PATH = path.resolve('mv3-hot-reload.config.js')
@@ -51,7 +52,9 @@ wss.on('connection', (ws) => {
       'all',
       debounce((_, path) => {
         if (!excludePaths.includes(path)) {
-          console.log('file change detected.')
+          if (!quiet) {
+            console.log('file change detected.')
+          }
           ws.send(Message.FileChange)
         }
       }, 500),
