@@ -3,7 +3,7 @@
 
 import chokidar from 'chokidar'
 import WebSocket = require('ws')
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 import path from 'path'
 import { Message } from '../src/utils'
 
@@ -44,19 +44,23 @@ wss.on('close', () => {
 })
 
 wss.on('connection', (ws) => {
-  chokidar
-    .watch(directoryPath, {
-      ignoreInitial: true,
-    })
-    .on(
-      'all',
-      debounce((_, path) => {
-        if (!excludePaths.includes(path)) {
-          if (!quiet) {
-            console.log('file change detected.')
-          }
-          ws.send(Message.FileChange)
+  const watcher = chokidar.watch(directoryPath, {
+    ignoreInitial: true,
+  })
+
+  watcher.on(
+    'all',
+    debounce((_, path) => {
+      if (!excludePaths.includes(path)) {
+        if (!quiet) {
+          console.log(`File change detected. Path: ${path}`)
         }
-      }, 500),
-    )
+        ws.send(Message.FileChange)
+      }
+    }, 500),
+  )
+
+  ws.on('close', () => {
+    watcher.close()
+  })
 })
