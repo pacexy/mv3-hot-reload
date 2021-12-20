@@ -8,9 +8,31 @@ Enable hot reloading for content script and background script (service worker) i
 yarn add mv3-hot-reload
 ```
 
-## Usage
+## How to use
 
-### 1. Import files into your background script (service worker) and content script
+### 1. Inject the code for hot reloading
+
+#### Leverage Webpack's "multi-main entry" (Recommended)
+
+```ts
+// webpack.config.ts
+const isDev = process.env.NODE_ENV === 'development'
+
+function getEntry(name: string) {
+  return [path.join(srcDir, name), ...(isDev ? [`mv3-hot-reload/${name}`] : [])]
+}
+
+const webpackConfig = {
+  // ...
+  entry: {
+    // ...
+    background: getEntry('background'),
+    content: getEntry('content'),
+  },
+}
+```
+
+#### Import files into your background script (service worker) and content script
 
 The code for hot reloading will only execute when `process.env.NODE_ENV === 'development'`.
 
@@ -38,7 +60,7 @@ Example:
 +   "dev": "concurrently yarn:watch:*",
 ```
 
-## mv3-hot-reload.config.js
+## mv3-hot-reload.config.js (Optional)
 
 ```js
 module.exports = {
