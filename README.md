@@ -66,14 +66,17 @@ Example:
 module.exports = {
   // Specify the port of hot reload server, defaults to 9012
   port: 9012,
+  // Specify other valid ENVs that you wish to use other than `development`
+  envs: ['sandbox']
   // Specify the directory you want to watch, defaults to 'dist'
   directory: 'dist',
   // Specifies an array of filenames that should be excluded in watched directory
   exclude: [],
+
 }
 ```
 
-If you want to set the port, you also need to expose it with `process.env.MV3_HOT_RELOAD_PORT` to
+If you want to set the port or other allowed dev environments, you also need to expose it with `process.env.MV3_HOT_RELOAD_PORT` to
 the client side.
 
 An example:
@@ -88,6 +91,7 @@ module.exports = {
   plugins: [
     new webpack.EnvironmentPlugin({
       MV3_HOT_RELOAD_PORT: config.port,
+      MV3_HOT_RELOAD_DEV_ENVS: config.envs,
     }),
   ],
 }
