@@ -32,6 +32,8 @@ const webpackConfig = {
 }
 ```
 
+**PLEASE NOTE:** if you intend to use this on different environments, you should also change the condition to `isDev` to the match the proper environment
+
 #### Import files into your background script (service worker) and content script
 
 The code for hot reloading will only execute when `process.env.NODE_ENV === 'development'`.
