@@ -18,8 +18,11 @@ yarn add mv3-hot-reload
 // webpack.config.ts
 const isDev = process.env.NODE_ENV === 'development'
 
-function getEntry(name: string) {
-  return [path.join(srcDir, name), ...(isDev ? [`mv3-hot-reload/${name}`] : [])]
+/**
+ * @param entryType specify the entry type for different entry names than 'content' or 'background'
+ */
+function getEntry(name: string, entryType?: 'content' | 'background') {
+  return [path.join(srcDir, name), ...(isDev ? [`mv3-hot-reload/${entryType ?? name}`] : [])]
 }
 
 const webpackConfig = {
@@ -28,6 +31,7 @@ const webpackConfig = {
     // ...
     background: getEntry('background'),
     content: getEntry('content'),
+    anotherContentScript: getEntry('anotherContentScriptFolder', 'content'),
   },
 }
 ```
